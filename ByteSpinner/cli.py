@@ -47,8 +47,8 @@ def info(ctx, key_file):
 
     # print info
     k = Spinner.loads(key_file.read())
-    click.echo('XOR base length: %d' % k.get_num_bytes())
-    click.echo('Iterations: %d' % k.get_num_iterations())
+    click.echo('XOR base length: %d' % k.num_bytes)
+    click.echo('Iterations: %d' % k.num_iterations)
 
 
 @cli.command()

@@ -19,14 +19,14 @@ class TestKeyGen(unittest.TestCase):
     def test_default(self):
         # default: 256 bytes, 10 iterations
         a = Spinner.generate()
-        self.assertEqual(a.get_num_bytes(), 256)
-        self.assertEqual(a.get_num_iterations(), 10)
+        self.assertEqual(a.num_bytes, 256)
+        self.assertEqual(a.num_iterations, 10)
 
     def test_short(self):
         # 8 bytes, 3 iterations
         a = Spinner.generate(8, 3)
-        self.assertEqual(a.get_num_bytes(), 8)
-        self.assertEqual(a.get_num_iterations(), 3)
+        self.assertEqual(a.num_bytes, 8)
+        self.assertEqual(a.num_iterations, 3)
 
     def test_errors(self):
         # arguments are not integers
@@ -51,8 +51,8 @@ class TestKeyIO(unittest.TestCase):
             f.close()
             m0 = json.dumps(json.loads(json_str), separators=(',', ':'))
             a = Spinner.loads(json_str)
-            self.assertEqual(a.get_num_bytes(), num_bytes)
-            self.assertEqual(a.get_num_iterations(), num_iterations)
+            self.assertEqual(a.num_bytes, num_bytes)
+            self.assertEqual(a.num_iterations, num_iterations)
             m1 = json.dumps(json.loads(a.dumps()), separators=(',', ':'))
             self.assertEqual(m0, m1)
         _do_test('key_tiny.json', 4, 1)

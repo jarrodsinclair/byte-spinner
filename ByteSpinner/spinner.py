@@ -93,10 +93,12 @@ class Spinner(object):
         s += '\n    ]\n}'
         return s
 
-    def get_num_bytes(self):
+    @property
+    def num_bytes(self):
         return len(self._keys[0][0])
 
-    def get_num_iterations(self):
+    @property
+    def num_iterations(self):
         return len(self._keys)
 
     def encrypt(self, plaintext):
@@ -106,12 +108,12 @@ class Spinner(object):
         num_pt_bytes = len(plaintext)
         if num_pt_bytes <= 0:
             raise SpinnerException('Plaintext is zero length.')
-        if num_pt_bytes > self.get_num_bytes():
+        if num_pt_bytes > self.num_bytes:
             raise SpinnerException('Plaintext is too long.')
 
         # do encryption
         ct = plaintext
-        num_iterations = self.get_num_iterations()
+        num_iterations = self.num_iterations
         for itr in range(num_iterations):
             for pos in range(num_pt_bytes):
                 b = ct[pos]
@@ -127,12 +129,12 @@ class Spinner(object):
         num_ct_bytes = len(ciphertext)
         if num_ct_bytes <= 0:
             raise SpinnerException('Ciphertext is zero length.')
-        if num_ct_bytes > self.get_num_bytes():
+        if num_ct_bytes > self.num_bytes:
             raise SpinnerException('Ciphertext is too long.')
 
         # do decryption
         pt = ciphertext
-        num_iterations = self.get_num_iterations()
+        num_iterations = self.num_iterations
         for itr in range(num_iterations-1, -1, -1):
             for pos in range(num_ct_bytes-1, -1, -1):
                 b = pt[pos]
