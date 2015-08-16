@@ -39,8 +39,8 @@ sp = Spinner.loads(f.read())
 f.close()
 
 # print properties
-print('XOR base length: %d' % sp.get_num_bytes())
-print('Iterations: %d' % sp.get_num_iterations())
+print('XOR base length: %d' % sp.num_bytes)
+print('Iterations: %d' % sp.num_iterations)
 ```
 
 Usage on the command line
